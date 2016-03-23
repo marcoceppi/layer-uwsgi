@@ -39,6 +39,8 @@ def configure(site, dir, uid='www-data', gid='www-data', plugins=None,
         socket_dir = '/srv/run/uwsgi'
         if not os.path.exists(socket_dir):
             os.makedirs(socket_dir)
+
+        os.chown(socket_dir, uid, gid)
         chownr(socket_dir, uid, gid)
 
         cfg['socket'] = os.path.join(socket_dir, '%s.socket' % site)
