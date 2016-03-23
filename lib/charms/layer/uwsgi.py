@@ -13,8 +13,8 @@ APP_DIR = '/etc/uwsgi/apps-enabled'
 HEADER = '[uwsgi]\n'
 
 
-def configure(site, dir, uid='www-data', gid='www-data', cfg=None,
-              plugins=None):
+def configure(site, dir, uid='www-data', gid='www-data', plugins=None,
+              cfg=None):
     """ create or update a UWSGI config
 
     :param site: name of configuration
@@ -22,7 +22,7 @@ def configure(site, dir, uid='www-data', gid='www-data', cfg=None,
     :param uid: user id/name to run with
     :param gid: group id/name to run with
     :param cfg: additional UWSGI configuration params
-    :param plugins: list of plugins to use
+    :param plugins: plugin to use
     """
 
     if not cfg:
@@ -32,7 +32,7 @@ def configure(site, dir, uid='www-data', gid='www-data', cfg=None,
     cfg['gid'] = gid
     cfg['chdir'] = dir
 
-    if plugins and isinstance(plugins, list):
+    if plugins:
         cfg['plugins'] = plugins
 
     if 'socket' not in cfg and not cfg.get('socket'):
