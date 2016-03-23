@@ -1,0 +1,7 @@
+includes:
+ - 'layer:basic'
+options:
+  basic:
+    packages:
+      - uwsgi
+      - uwsgi-plugin-python
