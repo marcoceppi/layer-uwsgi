@@ -1,4 +1,5 @@
 
+
 import os
 from configparser import SafeConfigParser
 
@@ -35,6 +36,9 @@ def configure(site, dir, uid='www-data', gid='www-data', cfg=None,
 
     if 'socket' not in cfg and not cfg.get('socket'):
         cfg['socket'] = '/run/uwsgi/%s/socket' % site
+
+    if 'master' not in cfg:
+        cfg['master'] = 'true'
 
     reload = True
     if not os.path.exists(cfg_path(site)):
