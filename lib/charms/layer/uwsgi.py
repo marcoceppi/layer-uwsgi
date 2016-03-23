@@ -59,7 +59,7 @@ def config(site):
 
     c = SafeConfigParser()
     c.read(cfg_path(site))
-    cfg = {s[0]: s[1] for s in c.items('uwsgi')}
+    return {s[0]: s[1] for s in c.items('uwsgi')}
 
 
 def remove(site):
