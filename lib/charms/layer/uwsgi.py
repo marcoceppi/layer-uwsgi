@@ -6,6 +6,7 @@ from configparser import SafeConfigParser
 from charmhelpers.core.host import service_running
 from charmhelpers.core.host import service_restart
 from charmhelpers.core.host import service_reload
+from charmhelpers.core.host import chownr
 
 
 APP_DIR = '/etc/uwsgi/apps-enabled'
@@ -35,7 +36,12 @@ def configure(site, dir, uid='www-data', gid='www-data', cfg=None,
         cfg['plugins'] = plugins
 
     if 'socket' not in cfg and not cfg.get('socket'):
-        cfg['socket'] = '/run/uwsgi/%s/socket' % site
+        socket_dir = '/srv/run/uwsgi'
+        if not os.path.exists(socket_dir):
+            os.makedirs(socker_dir)
+        chownr(socket_dir, uid, gid)
+
+        cfg['socket'] = os.path.join(socket_dir, '%s.socket' % site)
 
     if 'master' not in cfg:
         cfg['master'] = 'true'
