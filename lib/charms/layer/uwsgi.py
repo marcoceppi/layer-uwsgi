@@ -23,6 +23,9 @@ def configure(site, dir, uid='www-data', gid='www-data', cfg=None,
     :param plugins: list of plugins to use
     """
 
+    if not cfg:
+        cfg = {}
+
     cfg['uid'] = uid
     cfg['gid'] = gid
     cfg['chdir'] = dir
