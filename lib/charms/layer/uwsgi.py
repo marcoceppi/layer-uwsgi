@@ -1,6 +1,7 @@
 
-
 import os
+
+from shutil import chown
 from configparser import SafeConfigParser
 
 from charmhelpers.core.host import service_running
@@ -40,7 +41,7 @@ def configure(site, dir, uid='www-data', gid='www-data', plugins=None,
         if not os.path.exists(socket_dir):
             os.makedirs(socket_dir)
 
-        os.chown(socket_dir, uid, gid)
+        chown(socket_dir, uid, gid)
         chownr(socket_dir, uid, gid)
 
         cfg['socket'] = os.path.join(socket_dir, '%s.socket' % site)
