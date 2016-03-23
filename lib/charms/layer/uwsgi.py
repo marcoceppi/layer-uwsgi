@@ -1,6 +1,6 @@
 
 import os
-from ConfigParser import SafeConfigParser
+from configparser import SafeConfigParser
 
 from charmhelpers.core.host import service_running
 from charmhelpers.core.host import service_restart
